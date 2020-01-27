@@ -56,6 +56,11 @@ py36:
   script:
   - python setup.py test
 
+py37:
+  image: "python:3.7"
+  script:
+  - python setup.py test
+
 docs:
   before_script:
   - pip install Sphinx
