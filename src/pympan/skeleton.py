@@ -27,6 +27,22 @@ __license__ = "mit"
 
 _logger = logging.getLogger(__name__)
 
+def check_digit(mpan):
+    """Check MPAN digit.
+
+    The final digit in the MPAN is the check digit, and validates the previous 12 (the core) using a modulus 11 test. The check digit is calculated thus:
+
+    0. Multiply the first digit by 3
+    0. Multiply the second digit by the next prime number (5)
+    0. Repeat this for each digit (missing 11 out on the list of prime numbers for the purposes of this algorithm)
+    0. Add up all these products
+    0. The check digit is the sum modulo 11 modulo 10.
+
+    Args:
+      mpan -- The first 12 digits of the MPAN number, excluding the check digit.
+    """
+    return sum(prime * int(digit) for prime, digit in \
+            zip([3, 5, 7, 13, 17, 19, 23, 29, 31, 37, 41, 43], mpan)) % 11 % 10
 
 def fib(n):
     """Fibonacci example function
