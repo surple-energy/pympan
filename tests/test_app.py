@@ -18,14 +18,14 @@ def fixture_top_line():
 @pytest.fixture(name="bottom_line")
 def fixture_bottom_line():
     return "2199992801200"
-  
 
 def test_parse_top_line(top_line):
     top_line = parse_top_line(top_line)
     assert isinstance(top_line, dict)
-    assert top_line["profile_class"] =="01"
+    assert top_line["profile_class"] == "01"
     assert top_line["profile"] == "Domestic unrestricted"
     assert top_line["meter_time_switch_code"] == "801"
+    assert top_line["meter_time_switch"] == "Codes common across the Industry"
     assert top_line["line_loss_factor"] == "100"
 
 def test_parse_bottom_line(bottom_line):
@@ -42,4 +42,3 @@ def test_calculate_check_digit():
 def test_compare_check_digit(bottom_line):
     assert compare_check_digit(bottom_line)
     assert not compare_check_digit("2199992801201")
-

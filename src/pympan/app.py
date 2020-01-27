@@ -35,11 +35,11 @@ PROFILE_CLASSES = {
 }
 
 METER_TIME_SWITCH_CODES = {
-    "001–399": "DNO specific",
-    "400–499": "Reserved",
-    "500–509": "Codes for related Metering Systems – common across the Industry",
-    "510–799": "Codes for related Metering Systems – DNO specific",
-    "800–999": "Codes common across the Industry"
+    ("001", "399"): "DNO specific",
+    ("400", "499"): "Reserved",
+    ("500", "509"): "Codes for related Metering Systems – common across the Industry",
+    ("510", "799"): "Codes for related Metering Systems – DNO specific",
+    ("800", "999"): "Codes common across the Industry"
 }
 
 DISTRIBUTOR_IDS = {
@@ -60,10 +60,17 @@ DISTRIBUTOR_IDS = {
 }
 
 def parse_top_line(top_line: str) -> dict:
+    meter_time_switch_code = top_line[2:5]
+
+    for low, high in METER_TIME_SWITCH_CODES.keys():
+      if int(low) <= int(meter_time_switch_code) <= int(high):
+          meter_time_switch = METER_TIME_SWITCH_CODES[(low, high)]
+
     top_line_parsed = {
         "profile_class": top_line[0:2],
         "profile": PROFILE_CLASSES[top_line[0:2]],
-        "meter_time_switch_code": top_line[2:5],
+        "meter_time_switch_code": meter_time_switch_code,
+        "meter_time_switch": meter_time_switch,
         "line_loss_factor": top_line[5:8]
     }
     return top_line_parsed
