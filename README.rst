@@ -3,17 +3,24 @@ pympan
 ======
 
 
-Add a short description here!
+`pympan` is a small python utility to parse UK Meter Point Access Numbers (MPANS).
 
 
 Description
 ===========
 
-A longer description of your project goes here...
+Meter Point Access Numbers in the UK describe the Supply Number (S-Number) as 21 digits.
+These digits can be processed into the following:
+
+* Profile Class
+* Meter Time Switch
+* Line Loss Factor
+* Core
+    * Distributor ID
+    * Check Digit
 
 
 Note
 ====
 
-This project has been set up using PyScaffold 3.2.3. For details and usage
-information on PyScaffold see https://pyscaffold.org/.
+`surple-energy github organisation <https://github.com/surple-energy>` is the open source account for `Surple <https://surple.co.uk/>` 
